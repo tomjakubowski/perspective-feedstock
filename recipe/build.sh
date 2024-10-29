@@ -31,6 +31,10 @@ PROTOC=$(which protoc)
 # crates in the workspace. For right now, create blank supplemental rustdocs
 touch rust/perspective-client/docs/expression_gen.md
 
+# TODO: create the .data directory and copy the labextension into it. upstream
+# should probably also do this (in build.rs, so it's usable in wheel builds in
+# both contexts: builds of wheels from the sdist + builds of wheels from git
+# source
 pnpm run build
 
 # Install wheel to site-packages ($SP_DIR), wherefrom Conda assembles the .conda package contents

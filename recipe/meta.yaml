@@ -6,13 +6,19 @@ package:
   version: {{ version }}
 
 source:
-  git_url: https://github.com/finos/perspective.git
-  git_rev: v{{ version }}
-  patches:
-    - patches/0001-delete-lint-package.patch
-    - patches/0002-fix-flags.patch
-    - patches/0003-delete-postinstall-scripts.patch
-    - patches/0004-maturin-manylinux-off-external-cpp-feature.patch
+  - git_url: https://github.com/finos/perspective.git
+    git_rev: v{{ version }}
+    patches:
+      - patches/0001-delete-lint-package.patch
+      - patches/0002-fix-flags.patch
+      - patches/0003-delete-postinstall-scripts.patch
+      - patches/0004-maturin-manylinux-off-external-cpp-feature.patch
+  # NB: ideally this recipe would build only from the sdist.  But upstream does
+  # not yet guarantee publishing a working sdist, and indeed it is currently
+  # (as of October 2024) broken in several ways.
+  # XXX(tom): fix me to a real release from pypi/github
+  - url: https://files.localhost/perspective_python-3.1.2.tar.gz
+    folder: perspective-sdist/
 
 build:
   number: 0
